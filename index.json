@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Calculator",
+    "description": "A simple calculator tool that can perform basic arithmetic operations such as addition, subtraction, multiplication, and division.",
+    "versions": [
+      {
+        "version": "1.0.0",
+        "pythonEntryPoint": "main.py",
+        "postInstallScript": "install.ps1",
+        "runScript": "run.ps1",
+        "requirementsFile": "requirements.txt",
+        "sharedVenv": true,
+        "rootRelativePath": "Calculator/v1.0.0",
+        "users": ["admin@chinea.ch", "joseRamon", "alfredochinealab@outlook.com"]
+      },
+      {
+        "version": "2.0.0",
+        "pythonEntryPoint": "main.py",
+        "postInstallScript": "install.ps1",
+        "requirementsFile": "requirements.txt",
+        "sharedVenv": true,
+        "rootRelativePath": "Calculator/v2.0.0",
+        "users": []
+      }
+    ]
+  },
+  {
+    "name": "GetWeather",
+    "description": "A simple weather information tool that can fetch and display current weather data for a given location. from a weather API.",
+    "versions": [
+      {
+        "version": "1.0.0",
+        "pythonEntryPoint": "main.py",
+        "postInstallScript": "install.ps1",
+        "requirementsFile": "requirements.txt",
+        "sharedVenv": false,
+        "rootRelativePath": "GetWeather/v1.0.0",
+        "users": []
+      }
+    ]
+  }
+]
