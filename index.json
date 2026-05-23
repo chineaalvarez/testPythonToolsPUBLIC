@@ -38,5 +38,34 @@
         "users": []
       }
     ]
+  },
+  {
+    "name": "TextBanner",
+    "description": "A simple text banner tool that uses pyfiglet to render a message as ASCII art.",
+    "versions": [
+      {
+        "version": "1.0.0",
+        "pythonEntryPoint": "main.py",
+        "runScript": "run.ps1",
+        "requirementsFile": "requirements.txt",
+        "sharedVenv": false,
+        "rootRelativePath": "TextBanner/v1.0.0",
+        "users": []
+      }
+    ]
+  },
+  {
+    "name": "SlugMaker",
+    "description": "A simple slug tool that uses python-slugify to convert a title into URL-friendly text.",
+    "versions": [
+      {
+        "version": "1.0.0",
+        "pythonEntryPoint": "main.py",
+        "requirementsFile": "requirements.txt",
+        "sharedVenv": false,
+        "rootRelativePath": "SlugMaker/v1.0.0",
+        "users": []
+      }
+    ]
   }
 ]
