@@ -1,0 +1,47 @@
+name: Upload repository to Azure Blob Storage
+
+on:
+  push:
+    tags:
+      - "*"
+
+permissions:
+  contents: read
+
+jobs:
+  upload:
+    name: Upload tagged commit files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Prepare committed repository content
+        run: |
+          set -euo pipefail
+          mkdir -p .upload-content
+          git archive --format=tar "$GITHUB_SHA" | tar -xf - -C .upload-content
+
+      - name: Upload to Azure Blob Storage
+        uses: azure/cli@v2
+        env:
+          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+          AZURE_STORAGE_CONTAINER: ${{ vars.AZURE_STORAGE_CONTAINER }}
+        with:
+          inlineScript: |
+            set -euo pipefail
+            test -n "$AZURE_STORAGE_CONNECTION_STRING" || {
+              echo "Missing GitHub Actions secret: AZURE_STORAGE_CONNECTION_STRING"
+              exit 1
+            }
+            test -n "$AZURE_STORAGE_CONTAINER" || {
+              echo "Missing GitHub Actions variable: AZURE_STORAGE_CONTAINER"
+              exit 1
+            }
+
+            az storage blob upload-batch \
+              --destination "$AZURE_STORAGE_CONTAINER" \
+              --source "$GITHUB_WORKSPACE/.upload-content" \
+              --overwrite true \
+              --no-progress
